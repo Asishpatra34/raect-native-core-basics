@@ -19,11 +19,13 @@ import Grid from './src/screens/Grid';
 import Form from './src/screens/Form';
 import MyList from './src/screens/MyList';
 import MyStackNavigation from './src/screens/MyStackNavigation';
+import MyTabNavigation from './src/screens/MyTabNavigation';
+import MyTopTabNavigation from './src/screens/MyTopTabNavigation';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <MyStackNavigation />
+      <MyTopTabNavigation />
     </SafeAreaView>
   );
 };
