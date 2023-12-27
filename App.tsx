@@ -18,11 +18,12 @@ import MyTouchableOpacity from './src/screens/MyTouchableOpacity';
 import Grid from './src/screens/Grid';
 import Form from './src/screens/Form';
 import MyList from './src/screens/MyList';
+import MyStackNavigation from './src/screens/MyStackNavigation';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <MyTouchableOpacity />
+      <MyStackNavigation />
     </SafeAreaView>
   );
 };
