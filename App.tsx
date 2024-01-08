@@ -18,11 +18,12 @@ import MyTouchableOpacity from './src/screens/MyTouchableOpacity';
 import Grid from './src/screens/Grid';
 import Form from './src/screens/Form';
 import MyList from './src/screens/MyList';
+import MyApicall from './src/screens/MyApiCall';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <MyTouchableOpacity />
+      <MyApicall />
     </SafeAreaView>
   );
 };
