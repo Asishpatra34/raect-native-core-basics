@@ -1,9 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ReduxText from '../screens/ReduxTest';
-import ReduxTestUserList from '../screens/ReduxTestUserList';
-
-
+import CartScreen from '../screens/CartScreen';
 
 const Stack = createNativeStackNavigator();
 const MyStackNav = () => {
@@ -11,15 +9,15 @@ const MyStackNav = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Page1"
+          name="ProductScreen"
           component={ReduxText}
           options={{
             headerShown: false,
           }}
         />
         <Stack.Screen
-          name="Page2"
-          component={ReduxTestUserList}
+          name="CartScreen"
+          component={CartScreen}
           options={{
             headerBackVisible: true,
             headerTransparent: true,

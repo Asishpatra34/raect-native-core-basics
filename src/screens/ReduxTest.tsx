@@ -1,60 +1,114 @@
-import {Button, FlatList, Image, ScrollView, Text, View} from 'react-native';
+import {
+  Button,
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Header from '../components/Header';
 import Product from '../components/Product';
+import {useDispatch, useSelector} from 'react-redux';
+import { fetchProduct } from '../components/redux/slices/AsyncThunkSlice';
 
-const ReduxText = (props:any) => {
-  const products = [
-    {
-      id: 1,
-      name: 'Samsung mobile',
-      color: 'black',
-      price: 30000,
-      image:
-        'https://images.samsung.com/is/image/samsung/assets/in/smartphones/galaxy-s22/buy/S22_KV_4_MO.jpg',
-    },
-    {
-      id: 2,
-      name: 'Apple mobile',
-      color: 'red',
-      price: 20000,
-      image:
-        'https://media.croma.com/image/upload/v1662424508/Croma%20Assets/Communication/Mobiles/Images/229926_xrit8z.png',
-    },
-    {
-      id: 3,
-      name: 'Mi mobile',
-      color: 'blue',
-      price: 50000,
-      image:
-        'https://i02.appmifile.com/11_operator_in/23/04/2021/a3fa26aeb0a0e8ae38f38fb311d644e8.png',
-    },
-    {
-      id: 4,
-      name: 'Oneplus mobile',
-      color: 'purple',
-      price: 40000,
-      image:
-        'https://oasis.opstatics.com/content/dam/oasis/page/2021/9-series/spec-image/9/Wintermist_9.png',
-    },
-  ];
+const ReduxText = (props: any) => {
+  const products = useSelector((state: any) => state.ProductsReducer);
+  const cartItems = useSelector((state: any) => state.cartReducer);
+  const demoProducts = useSelector((state: any) => state.asyncThunkReducer);
 
-  const handleNextPage = () =>{
-    props.navigation.navigate('Page2');
-  }
+  console.log('demoProducts', demoProducts);
+
+  const dispatch = useDispatch();
+
+  const handleCallpApi = () => {
+    dispatch(fetchProduct())
+  };
+
+  const getTotal = () => {
+    let total = 0;
+    cartItems.map(item => {
+      total = total + item.qty * item.price;
+    });
+    return total;
+  };
+
+  const handleNextPage = () => {
+    props.navigation.navigate('CartScreen');
+  };
 
   return (
     <View style={{flex: 1}}>
-      <Button title='User List' onPress={handleNextPage} />
-      <Header />
-      <ScrollView>
-        <FlatList
-          data={products}
-          renderItem={({item}) => <Product props={item} />}
-          keyExtractor={item => item.id.toString()}
-        />
-      </ScrollView>
+      {/* <Button title='User List' onPress={handleNextPage} /> */}
+      <Button title="Call Api" onPress={() => handleCallpApi()} />
+      <Header navigation={props.navigation} />
+      <FlatList
+        data={products}
+        renderItem={({item}) => <Product props={item} />}
+        keyExtractor={item => item.id.toString()}
+      />
+      {cartItems.length <= 0 ? null : (
+        <View
+          style={{
+            flex: 1,
+            width: '100%',
+            height: 60,
+            backgroundColor: 'white',
+            position: 'absolute',
+            bottom: 0,
+            paddingLeft: 40,
+            flexDirection: 'row',
+          }}>
+          <View
+            style={{
+              width: '50%',
+              justifyContent: 'center',
+              height: '100%',
+              left: 0,
+              flex: 6,
+            }}>
+            <Text>{'Added items ' + '(' + cartItems.length + ')'}</Text>
+            <Text>{'Total ' + getTotal()}</Text>
+          </View>
+
+          <View
+            style={{
+              width: '50%',
+              justifyContent: 'center',
+              height: '100%',
+              left: 0,
+              flex: 4,
+              marginRight: 20,
+            }}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => handleNextPage()}>
+              <Text style={styles.text}>View Cart</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: 'green',
+    borderRadius: 10,
+    paddingVertical: 12,
+    marginHorizontal: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 140,
+    alignSelf: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+});
 
 export default ReduxText;

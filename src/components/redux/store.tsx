@@ -1,15 +1,30 @@
-import {configureStore} from '@reduxjs/toolkit';
-import rootReducer from './rootReducer';
-import createSagaMiddleware from "redux-saga";
-import SagaData from './saga';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import ProductsReducer from './slices/ProductSlice';
+import CartReducer from './slices/CartSlice';
+// import persistReducer from 'redux-persist/es/persistReducer';
+// import storage from 'redux-persist/es/storage';
+import AsyncThunkReducer from './slices/AsyncThunkSlice';
 
-const sagaMiddleware = createSagaMiddleware();
+// let persistConfig = {
+//   key: 'root',
+//   storage,
+// };
+
+// let rootReducer = combineReducers({
+//   ProductsReducer: ProductsReducer,
+//   cartReducer: CartReducer,
+//   asyncThunkReducer: AsyncThunkReducer,
+// });
+
+// let persistedReducer = persistReducer(persistConfig,rootReducer)
 
 const store = configureStore({
-  reducer: rootReducer,
-  middleware:()=>[sagaMiddleware]
+  reducer: {
+    ProductsReducer: ProductsReducer,
+    cartReducer: CartReducer,
+    asyncThunkReducer: AsyncThunkReducer,
+  },
+  // reducer: persistedReducer
 });
-
-sagaMiddleware.run(SagaData)
 
 export default store;
