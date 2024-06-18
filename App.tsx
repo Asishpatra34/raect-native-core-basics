@@ -18,11 +18,13 @@ import MyTouchableOpacity from './src/screens/MyTouchableOpacity';
 import Grid from './src/screens/Grid';
 import Form from './src/screens/Form';
 import MyList from './src/screens/MyList';
+import Animationss from './src/screens/Animationss';
+import DynamicHeaderrr from './src/screens/DynamicHeader';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <MyTouchableOpacity />
+      <DynamicHeaderrr />
     </SafeAreaView>
   );
 };
