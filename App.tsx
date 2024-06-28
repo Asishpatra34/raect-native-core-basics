@@ -20,11 +20,12 @@ import Form from './src/screens/Form';
 import MyList from './src/screens/MyList';
 import Animationss from './src/screens/Animationss';
 import DynamicHeaderrr from './src/screens/DynamicHeader';
+import BottomSheetExample from './src/screens/BottomSheetExample';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <DynamicHeaderrr />
+      <BottomSheetExample />
     </SafeAreaView>
   );
 };
