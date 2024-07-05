@@ -21,12 +21,16 @@ import MyList from './src/screens/MyList';
 import Animationss from './src/screens/Animationss';
 import DynamicHeaderrr from './src/screens/DynamicHeader';
 import BottomSheetExample from './src/screens/BottomSheetExample';
+import {Provider} from 'react-redux';
+import store from './src/store/Store';
 
 const App = () => {
   return (
+      <Provider store={store}>
     <SafeAreaView style={{flex: 1}}>
-      <BottomSheetExample />
+      <DynamicHeaderrr />
     </SafeAreaView>
+    </Provider>
   );
 };
 
